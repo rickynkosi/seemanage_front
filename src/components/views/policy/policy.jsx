@@ -20,7 +20,7 @@ class Policy extends Component {
         pageSize: 4,
         searchQuery: "",
         // selectedGenre: null,
-        sortColumn: { path: 'policyname', order: 'asc' }
+        sortColumn: { path: 'policynumber', order: 'asc' }
     } 
 
     async componentDidMount() {
@@ -37,8 +37,8 @@ class Policy extends Component {
     // }
 
     handleDelete = async (policy) => {
-        const originalpolicy = this.state.policies;
-        const policies = originalpolicy.filter(d => d._id !== policy._id);
+        const originalPolicy = this.state.policies;
+        const policies = originalPolicy.filter(d => d._id !== policy._id);
         this.setState({policies});
 
         try{
@@ -48,7 +48,7 @@ class Policy extends Component {
             if (ex.response && ex.response.status === 404){
                 toast.error('This policy has already been deleted.');
             }
-            this.setState({ policies: originalpolicy })
+            this.setState({ policies: originalPolicy })
         }
     }
 

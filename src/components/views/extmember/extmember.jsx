@@ -2,47 +2,49 @@ import React, { Component } from 'react';
 // import ListGroup from '../common/listGroup';
 import Pagination from '../../common/pagination';
 import { paginate } from '../../../utils/paginate';
-import { Link } from 'react-router-dom';
+import { Link, Outlet } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { deletePayment, getPayments } from '../../../services/paymentService'; 
+import { deleteExtMember, getExtMember } from '../../../services/extmemberService'; 
 // import { getGenres } from '../services/fakeGenreService';
-import PaymentsTable from './paymentsTable';
+import ExtMemberTable from './extmemberTable';
 import SearchBox from '../../common/searchBox';
 import lodash from 'lodash';
+import Member from './../member/member';
 
 
-class Payments extends Component {
+
+class ExtMember extends Component {
     state = { 
-        payments: [],
+        extmembers: [],
         // genres: [],
         currentPage: 1,
         pageSize: 4,
         searchQuery: "",
         // selectedGenre: null,
-        sortColumn: { path: 'paymentdate', order: 'asc' }
+        sortColumn: { path: 'firstname', order: 'asc' }
     } 
 
     async componentDidMount() {
         // const genres = [{ _id: '', name: 'All Genres '}, ...getGenres()]
         // this.setState({ districts: getDistricts(), genres });
 
-        const { data: payments } = await  getPayments();
-        this.setState({ payments })
+        const { data: extmembers } = await  getExtMember();
+        this.setState({ extmembers })
     }
 
-    handleDelete = async (payment) => {
-        const originalPayments = this.state.payments;
-        const payments = originalPayments.filter(d => d._id !== payment._id);
-        this.setState({payments});
+    handleDelete = async (extmember) => {
+        const originalExtMembers = this.state.extmembers;
+        const extmembers = originalExtMembers.filter(d => d._id !== extmember._id);
+        this.setState({extmembers});
 
         try{
-            await deletePayment(payment._id);
+            await deleteExtMember(extmember._id);
         }
         catch(ex){
             if (ex.response && ex.response.status === 404){
-                toast.error('This payment has already been deleted.');
+                toast.error('This extmember has already been deleted.');
             }
-            this.setState({ payments: originalPayments })
+            this.setState({ extmembers: originalExtMembers })
         }
     }
 
@@ -71,35 +73,46 @@ class Payments extends Component {
     };
 
     getPagedData = () => {
-        const { pageSize, currentPage, selectedGenre, sortColumn, searchQuery, payments: allPayments } = this.state;
+        const { pageSize, currentPage, selectedGenre, sortColumn, searchQuery, extmembers: allExtMembers } = this.state;
 
         // const filtered = selectedGenre && selectedGenre._id ? allMovies.filter(m => m.genre._id === selectedGenre._id) : allMovies;
 
-        let filtered = allPayments;
+        let filtered = allExtMembers;
         if (searchQuery){
-            filtered = allPayments.filter(m =>
+            filtered = allExtMembers.filter(m =>
                 m.title.toLowerCase().startsWith(searchQuery.toLowerCase())    
             );
         }
         else if (selectedGenre && selectedGenre._id){
-            filtered = allPayments.filter(m => m.genre._id === selectedGenre._id)
+            filtered = allExtMembers.filter(m => m.genre._id === selectedGenre._id)
         } 
 
         const sorted = lodash.orderBy(filtered, [sortColumn.path], [sortColumn.order] )
 
-        const payments = paginate(sorted, currentPage, pageSize);
+        const extmembers = paginate(sorted, currentPage, pageSize);
 
-        return { totalCount: filtered.length, data: payments }
+        return { totalCount: filtered.length, data: extmembers }
     };
 
+
+
     render() { 
-        const {length: count} = this.state.payments
+        const {length: count} = this.state.extmembers
         const { pageSize, currentPage, sortColumn, searchQuery } = this.state;
 
-        if (count === 0) return <p>There are no payments in the database.</p>;
+        // <Route exact path='/district/new' >
+        //     <NewDistrict />
+        // </Route>
 
 
-        const { totalCount, data: payments } = this.getPagedData();
+        if (count === 0) {
+            <p>There are no extmembers in the database.</p>;
+            // <Link to="new" className="btn btn-primary" style={{ marginBottom: 20 }}>New District</Link>;
+
+        } 
+
+
+        const { totalCount, data: extmembers } = this.getPagedData();
 
         return (
             <div className='row'>
@@ -109,15 +122,17 @@ class Payments extends Component {
                         selectedItem={this.state.selectedGenre}
                         onItemSelect={this.handleGenreSelect}
                     /> */}
+                    <Outlet/>
                 </div>
                 <div className="col">
-                    <Link to="payments" className="btn btn-primary" style={{ marginBottom: 20 }}>New District</Link>
-                    {/* <Link to="/payments/new" className="btn btn-primary" style={{ marginBottom: 20 }}>New Claim</Link>
-                    <Link to="/payments/new" className="btn btn-primary" style={{ marginBottom: 20 }}>Easy Pay Filter</Link> */}
-                    <p>Showing {totalCount} payments in the database.</p>
+                    {/* <Outlet/> */}
+                    <Link to="newextmember" className="btn btn-primary" style={{ marginBottom: 20 }}>Add Ext Member</Link>
+                    {/* <Link to="/extmembers/new" className="btn btn-primary" style={{ marginBottom: 20 }}>New Claim</Link>
+                    <Link to="/extmembers/new" className="btn btn-primary" style={{ marginBottom: 20 }}>Easy Pay Filter</Link> */}
+                    <p>Showing {totalCount} extmembers in the database.</p>
                     <SearchBox value={searchQuery} onChange={this.handleSearch} />
-                    <PaymentsTable 
-                        payments={payments} 
+                    <ExtMemberTable 
+                        extmembers={extmembers} 
                         sortColumn={sortColumn}
                         onSort={this.handleSort} 
                         onDelete={this.handleDelete}
@@ -133,5 +148,5 @@ class Payments extends Component {
         );
     }
 }
- 
-export default Payments;
+
+export default ExtMember;

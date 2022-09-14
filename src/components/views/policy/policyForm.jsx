@@ -1,22 +1,20 @@
 import React from 'react';
 import Joi from 'joi-browser';
-import { Outlet } from 'react-router-dom'
 import Form from '../../common/form';
 import { getPolicy, savePolicy } from '../../../services/policyService';
 // import { getGenres } from '../../services/Service';
 
 
 class PolicyForm extends Form {
-    const 
     state = { 
-        data: { policycode: '', policyname: '', cover: '', premium: '', benefits: '', extras: '' },
+        data: { policynumber: '', policyname: '', cover: '', premium: '', benefits: '', extras: '' },
         // genres: [],
         errors: {}
      }; 
 
     schema = {
         _id: Joi.string(),
-        policycode: Joi.string().required().label('Policy Code'),
+        policynumber: Joi.number().required().label('Policy Code'),
         policyname: Joi.string().required().label('Policy Name'),
         cover: Joi.string().required().min(0).max(100).label('Cover'),
         premium: Joi.string().required().min(0).max(10).label('Premium'),
@@ -46,7 +44,7 @@ class PolicyForm extends Form {
     mapToViewModel(policy){
         return {
             _id: policy._id,
-            policycode: policy.policycode,
+            policynumber: policy.policynumber,
             policyname: policy.policyname,
             cover: policy.cover,
             premium: policy.premium,
@@ -55,10 +53,10 @@ class PolicyForm extends Form {
         };
     }
 
-    doSubmit = () => {
-        savePolicy(this.state.data);
+    doSubmit = async () => {
+        await savePolicy(this.state.data);
 
-        this.props.history.push("policy");
+        // this.props.history.push("policy");
     };
 
 

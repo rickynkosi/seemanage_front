@@ -8,7 +8,20 @@ import { getMember, saveMember } from '../../../services/memberService';
 class MemberForm extends Form {
     const 
     state = { 
-        data: { title: '', firstname: '', lastname: '', idnumber: '', policy: '', physicaladdress: '', phonenumber: '', email: '' },
+        data: { 
+            title: '', 
+            firstname: '', 
+            lastname: '', 
+            idnumber: '', 
+            birthdate: '', 
+            passportnumber: '', 
+            premium: '', 
+            policy: '', 
+            postaladdres: '', 
+            physicaladdress: '', 
+            phonenumber: '', 
+            email: '' 
+        },
         // genres: [],
         errors: {}
      }; 
@@ -19,7 +32,11 @@ class MemberForm extends Form {
         firstname: Joi.string().required().label('Firstname'),
         lastname: Joi.string().required().min(0).max(100).label('Lastname'),
         idnumber: Joi.number().required().min(0).max(10).label(' ID Number'),
-        policy: Joi.string().required().min(0).max(10).label(' Policy'),
+        birthdate: Joi.string().required().min(0).max(10).label('Birth Date'),
+        passportnumber: Joi.string().required().min(0).max(10).label('Passport Number'),
+        premium: Joi.string().required().min(0).max(10).label('Premium'),
+        policy: Joi.string().required().min(0).max(10).label('Policy'),
+        postaladdres: Joi.string().required().min(0).max(10).label('Postal Address'),
         physicaladdress: Joi.string().required().min(0).max(10).label(' Physcial Address'),
         phonenumber: Joi.number().required().min(0).max(10).label(' Phonenumber'),
         email: Joi.string().required().email().min(0).max(10).label(' Email'),
@@ -51,7 +68,11 @@ class MemberForm extends Form {
             firstname: member.firstname,
             lastname: member.lastname,
             idnumber: member.idnumber,
+            birthdate: member.birthdate,
+            passportnumber: member.passportnumber,
+            premium: member.premium,
             policy: member.policy,
+            postaladdres: member.postaladdres,
             physicaladdress: member.physicaladdress,
             phonenumber: member.phonenumber,
             email: member.email
@@ -61,7 +82,7 @@ class MemberForm extends Form {
     doSubmit =  async () => {
         await saveMember(this.state.data);
 
-        this.props.history.push("member");
+        // this.props.history.push("member");
     };
 
 
@@ -74,7 +95,11 @@ class MemberForm extends Form {
                     {this.renderInput('firstname','Firstname')}
                     {this.renderInput('lastname','Lastname')}
                     {this.renderInput('idnumber','ID Number')}
+                    {this.renderInput('birthdate','Birth Date')}
+                    {this.renderInput('passportnumber','Passport Number')}
+                    {this.renderInput('premium','Premium')}
                     {this.renderInput('policy','Policy')}
+                    {this.renderInput('postaladdress','Postal Address')}
                     {this.renderInput('physicaladdress','Physical Addres')}
                     {this.renderInput('phonenumber','Phonenumber')}
                     {this.renderInput('email','Email')}

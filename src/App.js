@@ -19,8 +19,12 @@ import ManageDriver from './components/views/fleetmanagement/manageDriver';
 import ManageCar from './components/views/fleetmanagement/manageCar';
 import CashFuneral from './components/views/cashfunernal/cashfuneral';
 import CashFuneralForm from './components/views/cashfunernal/cashfuneralForm';
+import Branch from './components/views/branch/branch';
+import BranchForm from './components/views/branch/branchForm';
 import Sheet from './components/views/spreadsheet/sheet';
 import SheetForm from './components/views/spreadsheet/sheetForm';
+import ExtMember from './components/views/extmember/extmember';
+import ExtMemberForm from './components/views/extmember/extmemberForm';
 import Dashboard from './components/views/dashboard';
 import NotFound from './components/views/notFound';
 import NavBar from './components/views/navBar';
@@ -65,6 +69,14 @@ function App() {
               <Route path='payments' element={<Payments/>}>
                 <Route path=':newpayment' element={<PaymentsForm/>} />
                 <Route path=':id' element={<DriverForm/>} />
+              </Route>
+              <Route path='branch' element={<Branch/>}>
+                <Route path=':newbranch' element={<BranchForm/>} />
+                <Route path=':id' element={<BranchForm/>} />
+              </Route>
+              <Route path='extmember' element={<ExtMember/>}>
+                <Route path=':newextmember' element={<ExtMemberForm/>} />
+                <Route path=':id' element={<ExtMemberForm/>} />
               </Route>
               <Route path='sheet' element={<Sheet/>}>
                 <Route path=':newsheet' element={<SheetForm/>} />

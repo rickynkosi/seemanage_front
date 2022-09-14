@@ -4,7 +4,7 @@ import Pagination from '../../common/pagination';
 import { paginate } from '../../../utils/paginate';
 import { Link, Outlet } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { deleteBranch, getBranches } from '../../../services/districtService'; 
+import { deleteBranch, getBranches } from '../../../services/branchService'; 
 // import { getGenres } from '../services/fakeGenreService';
 import BranchTable from './branchTable';
 import SearchBox from '../../common/searchBox';
@@ -20,7 +20,7 @@ class Branch extends Component {
         pageSize: 4,
         searchQuery: "",
         // selectedGenre: null,
-        sortColumn: { path: 'branchname', order: 'asc' }
+        sortColumn: { path: 'branchid', order: 'asc' }
     } 
 
     async componentDidMount() {
