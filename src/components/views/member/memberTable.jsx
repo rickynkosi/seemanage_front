@@ -21,7 +21,7 @@ class MemberTable extends Component {
         { path: 'membertype', label: 'Member Type' },
         // { key: 'like', content: member => (<Like liked={member.liked} onClick={() => this.props.onLike(member)} />) },
         { key: 'delete', content: member => (<button onClick={() => this.props.onDelete(member)} className="btn btn-danger btn-sm">Delete</button>) },
-        { key: 'extmember', content: member => (<button className="btn btn-danger btn-sm">Add Ext Member</button>) }
+        { key: 'extmember', content: member => (<button className="btn btn-primary btn-sm">Add Ext Member</button>) }
     ];
 
     render() { 
