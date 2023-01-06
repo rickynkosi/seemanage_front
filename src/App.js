@@ -1,7 +1,7 @@
 import { Route, Routes } from 'react-router-dom';
 import LoginForm from './components/views/login';
 import RegisterForm from './components/views/register';
-import Users from './components/views/users/users';
+import User from './components/views/users/users';
 import UserForm from './components/views/users/usersForm';
 import Policy from './components/views/policy/policy';
 import PolicyForm from './components/views/policy/policyForm';
@@ -37,6 +37,7 @@ function App() {
       <main className='container'>
             <Routes>
               <Route index element={<Dashboard/>}/>
+              <Route path='/' element={<Dashboard/>}/>
               <Route path='district' element={<District/>}>
                 <Route path=':newdistrict' element={<DistrictForm/>}/>
                 <Route path=':id' element={<DistrictForm/>}/>
@@ -82,6 +83,8 @@ function App() {
                 <Route path=':newsheet' element={<SheetForm/>} />
                 <Route path=':id' element={<SheetForm/>} />
               </Route>
+              <Route path='login' element={<LoginForm/>}/>
+              <Route path='register' element={<RegisterForm/>}/>
               <Route path='*' element={<NotFound/>}/>
             </Routes>
       </main>

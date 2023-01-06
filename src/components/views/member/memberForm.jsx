@@ -15,9 +15,9 @@ class MemberForm extends Form {
             idnumber: '', 
             birthdate: '', 
             passportnumber: '', 
-            premium: '', 
             policy: '', 
-            postaladdres: '', 
+            premium: '', 
+            postaladdress: '', 
             physicaladdress: '', 
             phonenumber: '', 
             email: '' 
@@ -30,16 +30,16 @@ class MemberForm extends Form {
         _id: Joi.string(),
         title: Joi.string().required().label('Title'),
         firstname: Joi.string().required().label('Firstname'),
-        lastname: Joi.string().required().min(0).max(100).label('Lastname'),
-        idnumber: Joi.number().required().min(0).max(10).label(' ID Number'),
-        birthdate: Joi.string().required().min(0).max(10).label('Birth Date'),
-        passportnumber: Joi.string().required().min(0).max(10).label('Passport Number'),
-        premium: Joi.string().required().min(0).max(10).label('Premium'),
-        policy: Joi.string().required().min(0).max(10).label('Policy'),
-        postaladdres: Joi.string().required().min(0).max(10).label('Postal Address'),
-        physicaladdress: Joi.string().required().min(0).max(10).label(' Physcial Address'),
-        phonenumber: Joi.number().required().min(0).max(10).label(' Phonenumber'),
-        email: Joi.string().required().email().min(0).max(10).label(' Email'),
+        lastname: Joi.string().required().label('Lastname'),
+        idnumber: Joi.number().required().label(' ID Number'),
+        birthdate: Joi.string().required().label('Birth Date'),
+        passportnumber: Joi.string().required().label('Passport Number'),
+        policy: Joi.string().required().label('Policy'),
+        premium: Joi.number().required().label('Premium'),
+        postaladdress: Joi.string().required().label('Postal Address'),
+        physicaladdress: Joi.string().required().label(' Physcial Address'),
+        phonenumber: Joi.number().required().label(' Phonenumber'),
+        email: Joi.string().required().email().label(' Email')
     };
 
     async populateMember(){
@@ -70,9 +70,9 @@ class MemberForm extends Form {
             idnumber: member.idnumber,
             birthdate: member.birthdate,
             passportnumber: member.passportnumber,
-            premium: member.premium,
             policy: member.policy,
-            postaladdres: member.postaladdres,
+            premium: member.premium,
+            postaladdress: member.postaladdress,
             physicaladdress: member.physicaladdress,
             phonenumber: member.phonenumber,
             email: member.email
@@ -97,8 +97,8 @@ class MemberForm extends Form {
                     {this.renderInput('idnumber','ID Number')}
                     {this.renderInput('birthdate','Birth Date')}
                     {this.renderInput('passportnumber','Passport Number')}
-                    {this.renderInput('premium','Premium')}
                     {this.renderInput('policy','Policy')}
+                    {this.renderInput('premium','Premium')}
                     {this.renderInput('postaladdress','Postal Address')}
                     {this.renderInput('physicaladdress','Physical Addres')}
                     {this.renderInput('phonenumber','Phonenumber')}

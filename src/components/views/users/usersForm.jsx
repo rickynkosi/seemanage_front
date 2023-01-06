@@ -1,12 +1,11 @@
 import React from 'react';
 import Joi from 'joi-browser';
 import Form from '../../common/form';
-import { getUser, updateUser } from '../../../services/userService';
+// import { getUser, saveUser } from '../../../services/userService';
 // import { getPolicies } from '../../services/policyService';
 
 
 class UserForm extends Form {
-    const 
     state = { 
         data: { fullname: '', email: '', phoneNumber: '' , username: '', password: '', isAdmin:'' },
         // policies: [],
@@ -33,8 +32,8 @@ class UserForm extends Form {
             const userId = this.props.match.params.id;
             if (userId === "new") return;
 
-            const { data: user } = await getUser(userId);
-            this.setState({ data: this.mapToViewModel(user) });
+            // const { data: user } = await getUser(userId);
+            // this.setState({ data: this.mapToViewModel(user) });
         }
         catch(ex){
             if(ex.response && ex.response.status === 404){
@@ -62,9 +61,9 @@ class UserForm extends Form {
     }
 
     doSubmit = async () => {
-        await updateUser(this.state.data);
+        // await saveUser(this.state.data);
 
-        this.props.history.push("/users");
+        // this.props.history.push("/users");
     };
 
 
@@ -72,13 +71,15 @@ class UserForm extends Form {
         return (
             <div>
                 <h1>Users Form</h1>
-                {this.renderInput('fullname','Fullanme')}
-                {this.renderInput('email','Email')}
-                {this.renderInput('phonenumber','Phone Number')}
-                {this.renderInput('username','Username')}
-                {this.renderInput('password','Password')}
-                {this.renderInput('isAdmin','isAmin')}
-                {this.renderButton('Save')}
+                <form onSubmit={this.handleSubmit}>
+                    {this.renderInput('fullname','Fullanme')}
+                    {this.renderInput('email','Email')}
+                    {this.renderInput('phonenumber','Phone Number')}
+                    {this.renderInput('username','Username')}
+                    {this.renderInput('password','Password')}
+                    {this.renderInput('isAdmin','isAmin')}
+                    {this.renderButton('Save')}
+                </form>
             </div>
         );
     }

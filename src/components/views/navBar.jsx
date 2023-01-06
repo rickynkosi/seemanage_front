@@ -23,10 +23,10 @@ const NavBar = () => {
           <NavLink className="nav-item nav-link" to="/">
             Dashboard
           </NavLink>
-          <NavLink className="nav-item nav-link" to="branch">
+          <NavLink className="nav-item nav-link" to="/branch">
             Branch
           </NavLink>
-          <NavLink className="nav-item nav-link" to="district">
+          <NavLink className="nav-item nav-link" to="/district">
             District
           </NavLink>
           <NavLink className="nav-item nav-link" to="/policy">
@@ -49,6 +49,12 @@ const NavBar = () => {
           </NavLink>
           <NavLink className="nav-item nav-link" to="/sheet">
             Sheet
+          </NavLink>
+          <NavLink className="nav-item nav-link" to="/login">
+            Login
+          </NavLink>
+          <NavLink className="nav-item nav-link" to="/register">
+            Register
           </NavLink>
           {/* <NavLink className="nav-item nav-link" to="/members">Member</NavLink> */}
         </div>

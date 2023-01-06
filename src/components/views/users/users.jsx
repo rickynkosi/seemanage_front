@@ -7,7 +7,7 @@ import Pagination from '../../common/pagination';
 import { paginate } from '../../../utils/paginate';
 import UsersTable from './usersTable';
 import SearchBox from '../../common/searchBox';
-import { getUsers, deleteUsers } from '../../../services/userService'; 
+// import { getUsers, deleteUser } from '../../../services/userService'; 
 // import { getPolicies } from '../../services/policyService';
 
 
@@ -24,8 +24,8 @@ class Users extends Component {
         // const { data } = await getPolicies();
         // const policies = [{ _id: '', policyName: 'All Policies '}, ...data];
 
-        const { data: users } = await getUsers();
-        this.setState({ users });
+        // const { data: users } = await getUsers();
+        // this.setState({ users });
     }
 
     handleDelete = async(user) => {
@@ -34,7 +34,7 @@ class Users extends Component {
         this.setState({users});
 
         try{
-            await deleteUsers(user._id);
+            // await deleteUser(user._id);
         }
         catch(ex){
             if (ex.response && ex.response.status === 404){
@@ -92,7 +92,10 @@ class Users extends Component {
         const {length: count} = this.state.users
         const { pageSize, currentPage, sortColumn, searchQuery } = this.state;
 
-        if (count === 0) return <p>There are no users in the database.</p>;
+        if (count === 0) {
+            <Link to="newuser" className="btn btn-primary" style={{ marginBottom: 20 }}>New User</Link>;
+            <p>There are no users in the database.</p>;
+        }
 
 
         const { totalCount, data: users } = this.getPagedData();

@@ -16,9 +16,9 @@ class CashFuneralForm extends Form {
         _id: Joi.string(),
         fullname: Joi.string().required().label('Enter Fullname'),
         idnumber: Joi.number().required().label('ID Number'),
-        phonenumber: Joi.number().required().min(0).max(100).label('Phone Number'),
-        amount: Joi.number().required().min(0).max(10).label('Amount'),
-        services: Joi.string().required().min(0).max(10).label('Services')
+        phonenumber: Joi.number().required().label('Phone Number'),
+        amount: Joi.number().required().label('Amount'),
+        services: Joi.string().required().label('Services')
     };
 
     async populateCashFuneral(){
